@@ -19,8 +19,14 @@ public class PaperController {
     @RequestMapping("/allPaper")
     public String list(Model model){
         List<Paper> list = paperService.queryAllPaper();
+        for(Paper paper : list){
+            System.out.println("paperId:" + paper.getPaperId());
+            System.out.println("paperName:" + paper.getPaperName());
+            System.out.println("paperNum" + paper.getPaperNum());
+            System.out.println("paperDetail" + paper.getPaperDetail());
+        }
         model.addAttribute("list", list);
-        return "AllPaper";
+        return "allPaper";
     }
 
     @RequestMapping("/toAddPaper")
