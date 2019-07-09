@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.PaperDao">
+    <resultMap id="paperResultMap" type="Paper">
+        <id property="paperId" column="paper_id"/>
+        <id property="paperName" column="name"/>
+        <id property="paperNum" column="number"/>
+        <id property="paperDetail" column="detail"/>
+    </resultMap>
+    <insert id="addPaper" parameterType="Paper">
+        INSERT INTO paper(paper_id, name, number, detail) VALUES (#{paperId}, #{paperName}, #{paperNum}, #{paperDetail})
+    </insert>
+    <delete id="deletePaperById" parameterType="long">
+        DELETE FROM paper WHERE paper_id=#{paperId}
+    </delete>
+    <update id="updatePaper" parameterType="Paper">
+        UPDATE paper
+        SET name=#{paperName},number=#{paperNum},detail=#{paperDetail}
+        WHERE paper_id=#{paperId}
+    </update>
+    <select id="queryById" resultType="Paper" parameterType="long">
+        SELECT paper_id,name,number,detail
+        FROM paper
+        WHERE paper_id=#{paperId}
+    </select>
+    <select id="queryAllPaper" resultMap="paperResulrMap">
+        SELECT paper_id,name,num,detail
+        FROM paper
+    </select>
+</mapper>
